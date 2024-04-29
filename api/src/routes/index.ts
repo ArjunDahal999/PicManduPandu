@@ -7,7 +7,7 @@ import { userAuthenication } from '../middleware/authenticate-user';
 const router = express.Router();
 
 router.use('/', authRoute)
-router.use('/',userAuthenication,imageRoute )
+router.use('/', userAuthenication, imageRoute)
 
 
 

@@ -5,9 +5,17 @@ import { UserModel } from '../models/user-model';
 
 export const userAuthenication = async (req: Request, res: Response, next: NextFunction) =>
 {
+    let token;
     try
     {
-        const token = req.cookies['token'];
+        if (
+            req.cookies.token ||
+            (req.headers.authorization && req.headers.authorization.startsWith("Bearer"))
+        )
+        {
+            token = req.cookies.token || req.headers?.authorization?.split(" ")[1]
+        }
+
         if (!token) return res.status(400).json({ success: false, message: "Not logged In" });
 
         const decodedToken: any = jwt.verify(token, env.JWT_URL);

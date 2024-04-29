@@ -36,10 +36,20 @@ const swaggerOptions = {
             description: "API documentation for your application"
         },
         servers: [
-            {
-                url: `http://localhost:${env.PORT}`,
+            { url: `http://localhost:${env.PORT}` }
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT'
+                }
             }
-        ]
+        },
+        security: [{
+            bearerAuth: []
+        }]
     },
     apis: ["./src/routes/*.ts"]
 };
